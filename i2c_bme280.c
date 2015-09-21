@@ -58,7 +58,6 @@ uint16_t calib_dig_P1;
 
 bool ICACHE_FLASH_ATTR BME280_Init()
 {
-
 	i2c_init();
 
 	if(!BME280_verifyChipId()){
@@ -69,8 +68,7 @@ bool ICACHE_FLASH_ATTR BME280_Init()
 
 	BME280_readCalibrationRegisters();
 
-	return 0;
-
+	return 1;
 }
 
 bool ICACHE_FLASH_ATTR BME280_sendI2cWriteData(uint8_t writeReg, uint8_t regData){
