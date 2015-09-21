@@ -191,79 +191,79 @@ void ICACHE_FLASH_ATTR BME280_readCalibrationRegisters(void){
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_T1 = (msb << 8) | lsb;
-	#ifdef BME280_DEBUG
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_T1 = %u\r\n", lsb, msb, calib_dig_T1);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_T1 = %u\r\n", lsb, msb, calib_dig_T1);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_T2 = (msb << 8) | lsb;
-	#ifdef BME280_DEBUG
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_T2 = %d\r\n", lsb, msb, calib_dig_T2);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_T2 = %d\r\n", lsb, msb, calib_dig_T2);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_T3 = (msb << 8) | lsb;
-	#ifdef BME280_DEBUG
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_T3 = %d\r\n", lsb, msb, calib_dig_T3);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_T3 = %d\r\n", lsb, msb, calib_dig_T3);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_P1 = (msb << 8) | lsb;
-	#ifdef BME280_DEBUG
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P1 = %u\r\n", lsb, msb, calib_dig_P1);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P1 = %u\r\n", lsb, msb, calib_dig_P1);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_P2 = (msb << 8) | lsb;
-	#ifdef BME280_DEBUG
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P2 = %d\r\n", lsb, msb, calib_dig_P2);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P2 = %d\r\n", lsb, msb, calib_dig_P2);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_P3 = (msb << 8) | lsb;
-	#ifdef BME280_DEBUG
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P3 = %d\r\n", lsb, msb, calib_dig_P3);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P3 = %d\r\n", lsb, msb, calib_dig_P3);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_P4 = (msb << 8) | lsb;
-	#ifdef BME280_DEBUG
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P4 = %d\r\n", lsb, msb, calib_dig_P4);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P4 = %d\r\n", lsb, msb, calib_dig_P4);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_P5 = (msb << 8) | lsb;
-	#ifdef BME280_DEBUG
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P5 = %d\r\n", lsb, msb, calib_dig_P5);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P5 = %d\r\n", lsb, msb, calib_dig_P5);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_P6 = (msb << 8) | lsb;
-	#ifdef BME280_DEBUG
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P6 = %d\r\n", lsb, msb, calib_dig_P6);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P6 = %d\r\n", lsb, msb, calib_dig_P6);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_P7 = (msb << 8) | lsb;
-	#ifdef BME280_DEBUG
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P7 = %d\r\n", lsb, msb, calib_dig_P7);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P7 = %d\r\n", lsb, msb, calib_dig_P7);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_P8 = (msb << 8) | lsb;
-	#ifdef BME280_DEBUG
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P8 = %d\r\n", lsb, msb, calib_dig_P8);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P8 = %d\r\n", lsb, msb, calib_dig_P8);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte();
@@ -271,9 +271,9 @@ void ICACHE_FLASH_ATTR BME280_readCalibrationRegisters(void){
 	i2c_stop();
 
 	calib_dig_P9 = (msb << 8) | lsb;
-	#ifdef BME280_DEBUG
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P9 = %d\r\n", lsb, msb, calib_dig_P9);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_P9 = %d\r\n", lsb, msb, calib_dig_P9);
+	//#endif
 
 	//////////////
 	// Read section 0xA1
@@ -282,7 +282,9 @@ void ICACHE_FLASH_ATTR BME280_readCalibrationRegisters(void){
 	msb = i2c_readByte(); i2c_send_ack(0); // STOP
 	i2c_stop();
 	calib_dig_H1 = msb;
-	ets_uart_printf("msb: 0x%X = calib_dig_H1 = %d\r\n", msb, calib_dig_H1);
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("msb: 0x%X = calib_dig_H1 = %d\r\n", msb, calib_dig_H1);
+	//#endif
 
 	//////////////
 	// Read section 0xE1
@@ -291,27 +293,37 @@ void ICACHE_FLASH_ATTR BME280_readCalibrationRegisters(void){
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_H2 = (msb << 8) | lsb;
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_H2 = %d\r\n", lsb, msb, calib_dig_H2);
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_H2 = %d\r\n", lsb, msb, calib_dig_H2);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_H3 = lsb;
-	ets_uart_printf("lsb 0x%X = calib_dig_H3 = %d\r\n", lsb, calib_dig_H3);
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X = calib_dig_H3 = %d\r\n", lsb, calib_dig_H3);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	msb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_H4 = (lsb << 4) | (0x0f & msb);
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_H4 = %d\r\n", lsb, msb, calib_dig_H4);
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_H4 = %d\r\n", lsb, msb, calib_dig_H4);
+	//#endif
 
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	calib_dig_H5 = (lsb << 4) | ((msb >> 4) & 0x0F);
-	ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_H5 = %d\r\n", lsb, msb, calib_dig_H5);
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X, msb: 0x%X = calib_dig_H5 = %d\r\n", lsb, msb, calib_dig_H5);
+	//#endif
 
 	lsb = i2c_readByte();
 	i2c_send_ack(0); // STOP
 	i2c_stop();
 
 	calib_dig_H6 = lsb;
-	ets_uart_printf("lsb 0x%X = calib_dig_H6 = %d\r\n", lsb, calib_dig_H6);
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("lsb 0x%X = calib_dig_H6 = %d\r\n", lsb, calib_dig_H6);
+	//#endif
 
 }
 
@@ -327,9 +339,9 @@ bool ICACHE_FLASH_ATTR BME280_sendI2cReadSensorData(){
 	msb = i2c_readByte(); i2c_send_ack(1);
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	xlsb = i2c_readByte(); i2c_send_ack(1);
-	#ifdef BME280_DEBUG
-	ets_uart_printf("pres_raw 0: %X, pres_raw 1: %X, pres_raw 2: %X\r\n", msb, lsb, xlsb);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("pres_raw 0: %X, pres_raw 1: %X, pres_raw 2: %X\r\n", msb, lsb, xlsb);
+	//#endif
 
     pres_raw = (msb << 12) | (lsb << 4) | (xlsb >> 4);
 
@@ -337,18 +349,18 @@ bool ICACHE_FLASH_ATTR BME280_sendI2cReadSensorData(){
 	msb = i2c_readByte(); i2c_send_ack(1);
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	xlsb = i2c_readByte(); i2c_send_ack(1);
-	#ifdef BME280_DEBUG
-	ets_uart_printf("temp_raw 3: %X, temp_raw 4: %X, temp_raw 5: %X\r\n",msb, lsb, xlsb);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("temp_raw 3: %X, temp_raw 4: %X, temp_raw 5: %X\r\n",msb, lsb, xlsb);
+	//#endif
 
     temp_raw = (msb << 12) | (lsb << 4) | (xlsb >> 4);
 
 	//0xFD - humidity
 	msb = i2c_readByte(); i2c_send_ack(1);
 	lsb = i2c_readByte(); i2c_send_ack(1);
-	#ifdef BME280_DEBUG
-	ets_uart_printf("hum_raw 6: %X, hum_raw 7: %X\r\n", msb, lsb);
-	#endif
+	//#ifdef BME280_DEBUG
+	//ets_uart_printf("hum_raw 6: %X, hum_raw 7: %X\r\n", msb, lsb);
+	//#endif
 
     hum_raw  = (msb << 8) | lsb;
 
