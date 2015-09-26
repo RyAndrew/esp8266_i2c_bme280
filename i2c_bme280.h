@@ -43,9 +43,12 @@ THE SOFTWARE.
 #define BME280_REG_CTRL_MEAS		0xF4
 #define BME280_REG_CONFIG			0xF5
 
-#define BME280_DEBUG 1
+#define BME280_MODE_NORMAL			0x03 //reads sensors at set interval
+#define BME280_MODE_FORCED			0x01 //reads sensors once when you write this register
 
-bool BME280_Init(void);
+//#define BME280_DEBUG 1 //uncomment for debugging messages
+
+bool BME280_Init(uint8_t operationMode);
 bool ICACHE_FLASH_ATTR BME280_startI2cWrite(void);
 bool ICACHE_FLASH_ATTR BME280_sendI2cWriteData(uint8_t writeReg, uint8_t regData);
 bool ICACHE_FLASH_ATTR BME280_sendI2cRead(uint8_t readReg);

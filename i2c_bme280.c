@@ -51,18 +51,30 @@ uint16_t calib_dig_P1;
  int16_t calib_dig_H5;
  int8_t  calib_dig_H6;
 
+ uint8_t osrs_t = 1;             //Temperature oversampling x 1
+ uint8_t osrs_p = 1;             //Pressure oversampling x 1
+ uint8_t osrs_h = 1;             //Humidity oversampling x 1
+
+ uint8_t t_sb = 4;               //Tstandby, 5=1000ms, 4=500ms
+ uint8_t filter = 0;             //Filter off
+ uint8_t spi3w_en = 0;           //3-wire SPI Disable
+
+ uint8_t BME280_OperationMode = BME280_MODE_NORMAL;
+
  unsigned long int hum_raw, temp_raw, pres_raw;
  signed long int t_fine;
  signed long int temp_act;
  unsigned long int press_act, hum_act;
 
-bool ICACHE_FLASH_ATTR BME280_Init()
+bool ICACHE_FLASH_ATTR BME280_Init(uint8_t operationMode)
 {
 	i2c_init();
 
 	if(!BME280_verifyChipId()){
 		return 0;
 	}
+
+	BME280_OperationMode = operationMode;
 
 	BME280_writeConfigRegisters();
 
@@ -160,16 +172,7 @@ bool ICACHE_FLASH_ATTR BME280_verifyChipId(void){
 
 void ICACHE_FLASH_ATTR BME280_writeConfigRegisters(void){
 
-    uint8_t osrs_t = 1;             //Temperature oversampling x 1
-    uint8_t osrs_p = 1;             //Pressure oversampling x 1
-    uint8_t osrs_h = 1;             //Humidity oversampling x 1
-
-    uint8_t mode = 3;               //Normal mode
-    uint8_t t_sb = 5;               //Tstandby 1000ms
-    uint8_t filter = 0;             //Filter off
-    uint8_t spi3w_en = 0;           //3-wire SPI Disable
-
-    uint8_t ctrl_meas_reg = (osrs_t << 5) | (osrs_p << 2) | mode;
+    uint8_t ctrl_meas_reg = (osrs_t << 5) | (osrs_p << 2) | BME280_OperationMode;
     uint8_t ctrl_hum_reg  = osrs_h;
 
     uint8_t config_reg    = (t_sb << 5) | (filter << 2) | spi3w_en;
@@ -327,9 +330,30 @@ void ICACHE_FLASH_ATTR BME280_readCalibrationRegisters(void){
 
 }
 
+bool ICACHE_FLASH_ATTR BME280_sendI2cTriggerForcedRead(){
+
+    uint8_t ctrl_meas_reg = (osrs_t << 5) | (osrs_p << 2) | BME280_OperationMode;
+
+    BME280_sendI2cWriteData(BME280_REG_CTRL_MEAS, ctrl_meas_reg);
+
+    os_delay_us(10000); // wait 10ms for worst case max sensor read time
+
+	return 1;
+}
 bool ICACHE_FLASH_ATTR BME280_sendI2cReadSensorData(){
 
     uint8 msb, lsb, xlsb;
+
+	#ifdef BME280_DEBUG
+	ets_uart_printf("operation mode = %d\r\n", BME280_OperationMode);
+	#endif
+
+    if(BME280_OperationMode == BME280_MODE_FORCED){
+    	if(!BME280_sendI2cTriggerForcedRead()){
+    		return 0;
+    	}
+    }
+
 
 	if(!BME280_sendI2cRead(0xF7)){
 		return 0;
@@ -339,9 +363,9 @@ bool ICACHE_FLASH_ATTR BME280_sendI2cReadSensorData(){
 	msb = i2c_readByte(); i2c_send_ack(1);
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	xlsb = i2c_readByte(); i2c_send_ack(1);
-	//#ifdef BME280_DEBUG
-	//ets_uart_printf("pres_raw 0: %X, pres_raw 1: %X, pres_raw 2: %X\r\n", msb, lsb, xlsb);
-	//#endif
+	#ifdef BME280_DEBUG
+	ets_uart_printf("pres_raw 0: %X, pres_raw 1: %X, pres_raw 2: %X\r\n", msb, lsb, xlsb);
+	#endif
 
     pres_raw = (msb << 12) | (lsb << 4) | (xlsb >> 4);
 
@@ -349,18 +373,18 @@ bool ICACHE_FLASH_ATTR BME280_sendI2cReadSensorData(){
 	msb = i2c_readByte(); i2c_send_ack(1);
 	lsb = i2c_readByte(); i2c_send_ack(1);
 	xlsb = i2c_readByte(); i2c_send_ack(1);
-	//#ifdef BME280_DEBUG
-	//ets_uart_printf("temp_raw 3: %X, temp_raw 4: %X, temp_raw 5: %X\r\n",msb, lsb, xlsb);
-	//#endif
+	#ifdef BME280_DEBUG
+	ets_uart_printf("temp_raw 3: %X, temp_raw 4: %X, temp_raw 5: %X\r\n",msb, lsb, xlsb);
+	#endif
 
     temp_raw = (msb << 12) | (lsb << 4) | (xlsb >> 4);
 
 	//0xFD - humidity
 	msb = i2c_readByte(); i2c_send_ack(1);
 	lsb = i2c_readByte(); i2c_send_ack(1);
-	//#ifdef BME280_DEBUG
-	//ets_uart_printf("hum_raw 6: %X, hum_raw 7: %X\r\n", msb, lsb);
-	//#endif
+	#ifdef BME280_DEBUG
+	ets_uart_printf("hum_raw 6: %X, hum_raw 7: %X\r\n", msb, lsb);
+	#endif
 
     hum_raw  = (msb << 8) | lsb;
 

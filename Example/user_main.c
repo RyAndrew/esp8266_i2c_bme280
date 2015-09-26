@@ -1,9 +1,9 @@
 /*
  *  Examples read temperature, pressure, humidity from BME280
  *
- *	BME280 connected to
- *	I2C SDA - GPIO2
- *	I2C SCL - GPIO0
+ *  BME280 connected to
+ *  I2C SDA - GPIO2
+ *  I2C SCL - GPIO0
  *
  */
 
@@ -27,16 +27,16 @@ void sensor_timerfunc(void *arg)
 
     BME280_readSensorData();
 
-	signed long int temp;
-	temp = BME280_GetTemperature();
-	unsigned long int press;
-	press = BME280_GetPressure();
-	unsigned long int hum;
-	hum = BME280_GetHumidity();
+    signed long int temp;
+    temp = BME280_GetTemperature();
+    unsigned long int press;
+    press = BME280_GetPressure();
+    unsigned long int hum;
+    hum = BME280_GetHumidity();
 
-	ets_uart_printf("Temp: %d.%d DegC, ", (int)(temp/100), (int)(temp%100));
-  ets_uart_printf("Pres: %d.%d hPa, ", (int)(press/100), (int)(press%100));
-  ets_uart_printf("Hum: %d.%d pct \r\n", (int)(hum/1024), (int)(hum%1024));
+    ets_uart_printf("Temp: %d.%d DegC, ", (int)(temp/100), (int)(temp%100));
+    ets_uart_printf("Pres: %d.%d hPa, ", (int)(press/100), (int)(press%100));
+    ets_uart_printf("Hum: %d.%d pct \r\n", (int)(hum/1024), (int)(hum%1024));
 
 }
 
@@ -60,15 +60,15 @@ void user_init(void)
     ets_uart_printf("\r\nBooting...\r\n");
 
     // Init
-    if (BME280_Init() ) {
-		//Disarm timer
-		os_timer_disarm(&sensor_timer);
-		//Setup timer
-		os_timer_setfn(&sensor_timer, (os_timer_func_t *)sensor_timerfunc, NULL);
-		//Arm timer for every 5 sec.
-		os_timer_arm(&sensor_timer, 5000, 1);
+    if (BME280_Init(BME280_MODE_FORCED) ) {
+        //Disarm timer
+        os_timer_disarm(&sensor_timer);
+        //Setup timer
+        os_timer_setfn(&sensor_timer, (os_timer_func_t *)sensor_timerfunc, NULL);
+        //Arm timer for every 5 sec.
+        os_timer_arm(&sensor_timer, 5000, 1);
     }else{
-    	ets_uart_printf("BME280 init error.\r\n");
+        ets_uart_printf("BME280 init error.\r\n");
     }
 
     system_os_task(user_procTask, user_procTaskPrio,user_procTaskQueue, user_procTaskQueueLen);
