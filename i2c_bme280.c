@@ -29,8 +29,8 @@ THE SOFTWARE.
 
 #include <math.h>
 
-#include "../include/driver/i2c_bme280.h"
-#include "driver/i2c.h"
+#include "i2c_bme280.h"
+#include "../i2c/i2c.h"
 
 uint16_t calib_dig_T1;
  int16_t calib_dig_T2;
